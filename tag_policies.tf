@@ -1,22 +1,9 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-}
-
 ###################################
 #### Create Tag Policies
 ###################################
 
-resource "aws_organizations_policy" "rds_tagging" {
-  name = "rds_tagging"
+resource "aws_organizations_policy" "ec2_machine_tagging" {
+  name = "ec2_machine_tagging"
   type = "TAG_POLICY"
   content = <<CONTENT
 {
@@ -46,11 +33,13 @@ resource "aws_organizations_policy" "rds_tagging" {
                     "realsure",
                     "foundation/pyramid",
                     "DevOps"
+
+
                 ]
             },
             "enforced_for": {
                 "@@assign": [
-                    "rds:instance"
+                    "ec2:instance"
                 ]
             }
         },
@@ -105,41 +94,6 @@ resource "aws_organizations_policy" "rds_tagging" {
     CONTENT
 }
 
-###################################
-#### Attach tag policies to accounts
-###################################
 
-resource "aws_organizations_policy_attachment" "restrict_regions_on_root" {
-  policy_id = aws_organizations_policy.rds_machine_tagging.id
-  target_id = aws_organizations_account.account_test.id 
-}
 
-###################################
-##### Add in aws_organization_organization
-###################################
 
-resource "aws_organizations_organization" "my_hpa" {
-   feature_set = "ALL"
-   aws_service_access_principals = [
-          "cloudtrail.amazonaws.com",
-          "health.amazonaws.com",
-          "ram.amazonaws.com",
-          "securityhub.amazonaws.com",
-          "sso.amazonaws.com"
-        ]
-   enabled_policy_types = [
-     "TAG_POLICY",
-      "SERVICE_CONTROL_POLICY"
-   ]
-}
-
-/* 
-Cost:Service = 
-
-Cost:Team =  
-
-Department =  
-
-Environment = 
-
-PatchingOwner = */

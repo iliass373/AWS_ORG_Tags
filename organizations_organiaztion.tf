@@ -2,7 +2,7 @@
 ##### Add in aws_organization_organization
 ###################################
 
-resource "aws_organizations_organization" "my_hpa" {
+resource "aws_organizations_organization" "my_org" {
    feature_set = "ALL"
    aws_service_access_principals = [
           "cloudtrail.amazonaws.com",

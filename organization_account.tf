@@ -3,6 +3,8 @@
 ##################################
 
 resource "aws_organizations_account" "account" {
-  name  = "my_new_account"
-  email = "john@doe.org"
+  name  = "Yassine-AWS"
+  email = "yassine.elhafiani@gmail.com" # TODO 
+  
+
 }

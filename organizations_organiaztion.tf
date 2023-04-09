@@ -5,14 +5,14 @@
 resource "aws_organizations_organization" "my_org" {
    feature_set = "ALL"
    aws_service_access_principals = [
-          "cloudtrail.amazonaws.com",
+          /* "cloudtrail.amazonaws.com",
           "health.amazonaws.com",
           "ram.amazonaws.com",
           "securityhub.amazonaws.com",
-          "sso.amazonaws.com"
+          "sso.amazonaws.com" */
         ]
    enabled_policy_types = [
-     "TAG_POLICY",
-      "SERVICE_CONTROL_POLICY"
+      /* "TAG_POLICY",
+      "SERVICE_CONTROL_POLICY" */
    ]
 }
